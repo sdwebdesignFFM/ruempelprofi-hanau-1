@@ -21,8 +21,16 @@ const faqSchema = {
     acceptedAnswer: { '@type': 'Answer', text: f.a },
   })),
 };
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Start', item: `${city.url}/` },
+    { '@type': 'ListItem', position: 2, name: s.navTitle, item: `${city.url}/${s.slug}` },
+  ],
+};
 ---
-<Base title={`${s.title} | ${city.brand}`} description={s.metaDescription}>
+<Base title={s.title} description={s.metaDescription}>
   <section class="subhero">
     <div class="container">
       <nav class="breadcrumb"><a href="/">Start</a> › {s.navTitle}</nav>
@@ -92,4 +100,5 @@ const faqSchema = {
   <CtaSection />
 
   <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
 </Base>

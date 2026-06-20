@@ -1,0 +1,17 @@
+---
+import Base from '../layouts/Base.astro';
+import { Icon } from 'astro-icon/components';
+import { city } from '../data/hanau';
+---
+<Base title={`Seite nicht gefunden – ${city.brand}`} description="Diese Seite wurde nicht gefunden." noindex={true}>
+  <section class="section">
+    <div class="container" style="max-width:600px;text-align:center;display:flex;flex-direction:column;gap:16px;align-items:center">
+      <h1 style="font-size:32px;font-weight:800">Seite nicht gefunden</h1>
+      <p style="color:var(--text-secondary);font-size:17px">Die aufgerufene Seite existiert leider nicht (mehr). Kehren Sie zur Startseite zurück oder rufen Sie uns direkt an.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center">
+        <a class="btn btn-call" href={`tel:${city.nap.phoneLink}`}><Icon name="lucide:phone" />{city.nap.phoneDisplay}</a>
+        <a class="btn btn-quote" href="/"><Icon name="lucide:home" />Zur Startseite</a>
+      </div>
+    </div>
+  </section>
+</Base>
