@@ -1,0 +1,22 @@
+---
+import { Icon } from 'astro-icon/components';
+import { city } from '../data/hanau';
+---
+<header class="header">
+  <div class="container">
+    <a href="/" class="logo" aria-label={city.brand}>
+      <span class="mark"><Icon name="lucide:truck" /></span>
+      <span>{city.brand}</span>
+    </a>
+    <nav class="nav" aria-label="Hauptnavigation">
+      <a href="#leistungen">Leistungen</a>
+      <a href="#ablauf">Ablauf</a>
+      <a href="#preise">Preise</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
+    <a class="header-phone" href={`tel:${city.nap.phoneLink}`}>
+      <Icon name="lucide:phone-call" />
+      <span>{city.nap.phoneDisplay}</span>
+    </a>
+  </div>
+</header>

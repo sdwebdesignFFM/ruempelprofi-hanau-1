@@ -1,0 +1,20 @@
+{
+  "name": "rank-rent-entruempelung",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.1.6",
+    "@fontsource/inter": "^5.1.0",
+    "@fontsource/plus-jakarta-sans": "^5.1.0",
+    "@iconify-json/lucide": "^1.2.18",
+    "astro": "^4.16.18",
+    "astro-icon": "^1.1.5"
+  }
+}

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ruempelprofi-hanau.de/sitemap-index.xml

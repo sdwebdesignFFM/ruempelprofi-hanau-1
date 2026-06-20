@@ -1,0 +1,8 @@
+---
+import { Icon } from 'astro-icon/components';
+import { city } from '../data/hanau';
+---
+<div class="sticky-bar">
+  <a class="btn btn-call" href={`tel:${city.nap.phoneLink}`}><Icon name="lucide:phone" />Anrufen</a>
+  <a class="btn btn-quote" href="#kontakt"><Icon name="lucide:clipboard-check" />Anfrage</a>
+</div>

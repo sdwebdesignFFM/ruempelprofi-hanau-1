@@ -1,0 +1,230 @@
+---
+import { Image } from 'astro:assets';
+import { Icon } from 'astro-icon/components';
+import Base from '../layouts/Base.astro';
+import ContactForm from '../components/ContactForm.astro';
+import { city } from '../data/hanau';
+import heroImg from '../assets/hero.png';
+import areaImg from '../assets/area.png';
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: city.faq.items.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+---
+<Base>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-text">
+        <div class="hero-badges">
+          {city.hero.eyebrowBadges.map((b) => (
+            <span class="badge"><Icon name={`lucide:${b.icon}`} />{b.label}</span>
+          ))}
+        </div>
+        <h1>{city.hero.h1}</h1>
+        <p class="sub">{city.hero.subline}</p>
+        <ul class="hero-usps">
+          {city.hero.usps.map((u) => (
+            <li><Icon name="lucide:circle-check" />{u}</li>
+          ))}
+        </ul>
+        <div class="hero-cta">
+          <a class="btn btn-call" href={`tel:${city.nap.phoneLink}`}><Icon name="lucide:phone" />Jetzt anrufen</a>
+          <a class="btn btn-quote" href="#kontakt"><Icon name="lucide:clipboard-check" />Kostenlose Besichtigung</a>
+        </div>
+      </div>
+      <div class="hero-img">
+        <Image src={heroImg} alt={`Entrümpelung in ${city.name} – Team beim Beladen des Transporters`} widths={[390, 640, 760]} sizes="(min-width: 768px) 540px, 100vw" loading="eager" />
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST BAR -->
+  <section class="trustbar">
+    <div class="container">
+      {city.trust.map((t) => (
+        <div class="trust-item"><Icon name={`lucide:${t.icon}`} />{t.label}</div>
+      ))}
+    </div>
+  </section>
+
+  <!-- LEISTUNGEN -->
+  <section class="section" id="leistungen">
+    <div class="container">
+      <div class="s-head">
+        <span class="eyebrow">{city.services.eyebrow}</span>
+        <h2>{city.services.h2}</h2>
+        <p>{city.services.sub}</p>
+      </div>
+      <div class="grid grid-2 grid-3">
+        {city.services.items.map((s) => (
+          <a class="card" href={s.href}>
+            <span class="iconwrap"><Icon name={`lucide:${s.icon}`} /></span>
+            <h3>{s.title}</h3>
+            <p>{s.desc}</p>
+            <span class="more">Mehr erfahren <Icon name="lucide:arrow-right" /></span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ABLAUF -->
+  <section class="section section--muted" id="ablauf">
+    <div class="container">
+      <div class="s-head">
+        <span class="eyebrow">{city.process.eyebrow}</span>
+        <h2>{city.process.h2}</h2>
+        <p>{city.process.sub}</p>
+      </div>
+      <div class="grid grid-2 grid-4">
+        {city.process.steps.map((st) => (
+          <div class="step">
+            <div class="step-top">
+              <span class="step-num">{st.n}</span>
+              <Icon name={`lucide:${st.icon}`} />
+            </div>
+            <h3>{st.title}</h3>
+            <p>{st.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- PREIS -->
+  <section class="section" id="preise">
+    <div class="container price-inner">
+      <div class="price-left">
+        <span class="eyebrow">{city.pricing.eyebrow}</span>
+        <h2>{city.pricing.h2}</h2>
+        <p class="body">{city.pricing.body}</p>
+        <ul class="price-bullets">
+          {city.pricing.bullets.map((b) => (
+            <li><Icon name="lucide:circle-check" />{b}</li>
+          ))}
+        </ul>
+        <a class="btn btn-call" href="#kontakt" style="align-self:flex-start"><Icon name="lucide:badge-euro" />Festpreis anfragen</a>
+      </div>
+      <div class="price-card">
+        <div class="head">Preisbeispiele {city.name}</div>
+        {city.pricing.items.map((it) => (
+          <div class="price-row"><span>{it.label}</span><span class="p">{it.price}</span></div>
+        ))}
+        <div class="price-note">{city.pricing.note}</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WARUM WIR -->
+  <section class="section section--dark">
+    <div class="container">
+      <div class="s-head">
+        <span class="eyebrow">{city.why.eyebrow}</span>
+        <h2>{city.why.h2}</h2>
+      </div>
+      <div class="grid grid-2 grid-3">
+        {city.why.items.map((w) => (
+          <div class="why-item">
+            <span class="iconwrap"><Icon name={`lucide:${w.icon}`} /></span>
+            <h3>{w.title}</h3>
+            <p>{w.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- BEWERTUNGEN (nur wenn echte Bewertungen vorhanden) -->
+  {city.reviews.items.length > 0 && (
+  <section class="section section--muted" id="bewertungen">
+    <div class="container">
+      <div class="s-head">
+        <span class="eyebrow">{city.reviews.eyebrow}</span>
+        <h2>{city.reviews.h2}</h2>
+      </div>
+      <div class="grid grid-3">
+        {city.reviews.items.map((r) => (
+          <div class="review">
+            <div class="stars">{[1,2,3,4,5].map(() => <Icon name="lucide:star" />)}</div>
+            <p class="quote">{r.quote}</p>
+            <div class="author">
+              <span class="avatar">{r.initial}</span>
+              <span class="meta"><b>{r.name}</b><span>{r.location}</span></span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+  )}
+
+  <!-- EINSATZGEBIET -->
+  <section class="section">
+    <div class="container area-inner">
+      <div class="area-left">
+        <span class="eyebrow">{city.area.eyebrow}</span>
+        <h2>{city.area.h2}</h2>
+        <p class="body">{city.area.body}</p>
+        <div class="pills">
+          {city.area.places.map((p) => (
+            <span class="pill"><Icon name="lucide:map-pin" />{p}</span>
+          ))}
+        </div>
+      </div>
+      <div class="area-img">
+        <Image src={areaImg} alt={`Entrümpelung im Einsatzgebiet ${city.name} und Umgebung`} widths={[390, 640, 960]} sizes="(min-width: 768px) 480px, 100vw" loading="lazy" />
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section section--muted">
+    <div class="container">
+      <div class="s-head">
+        <span class="eyebrow">{city.faq.eyebrow}</span>
+        <h2>{city.faq.h2}</h2>
+      </div>
+      <div class="faq-list">
+        {city.faq.items.map((f) => (
+          <details class="faq-item">
+            <summary>{f.q}<Icon name="lucide:chevron-down" /></summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="section final" id="kontakt">
+    <div class="container final-inner">
+      <div class="final-left">
+        <span class="eyebrow">{city.finalCta.eyebrow}</span>
+        <h2>{city.finalCta.h2}</h2>
+        <p class="body">{city.finalCta.body}</p>
+        <a class="phone-block" href={`tel:${city.nap.phoneLink}`}>
+          <span class="pi"><Icon name="lucide:phone-call" /></span>
+          <span>
+            <span class="small">{city.nap.openingHours} · kostenlos anrufen</span><br />
+            <span class="num">{city.nap.phoneDisplay}</span>
+          </span>
+        </a>
+        <div class="final-badges">
+          {city.finalCta.badges.map((b) => (
+            <span><Icon name="lucide:circle-check" />{b}</span>
+          ))}
+        </div>
+      </div>
+      <ContactForm />
+    </div>
+  </section>
+
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+</Base>

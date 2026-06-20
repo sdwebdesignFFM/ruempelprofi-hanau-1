@@ -1,0 +1,62 @@
+---
+import Base from '../layouts/Base.astro';
+import { city } from '../data/hanau';
+const op = city.operator;
+---
+<Base title={`Impressum – ${city.brand}`} description="Impressum und Anbieterkennzeichnung.">
+  <div class="container legal-page">
+    <h1>Impressum</h1>
+
+    <h2>Angaben gemäß § 5 DDG</h2>
+    <p>
+      {op.company}<br />
+      {op.owner}<br />
+      {op.street}<br />
+      {op.zip} {op.cityName}<br />
+      {op.country}
+    </p>
+
+    <h2>Kontakt</h2>
+    <p>
+      Telefon: {city.nap.phoneDisplay}<br />
+      E-Mail: <a href={`mailto:${op.email}`}>{op.email}</a><br />
+      Web: <a href={op.website}>{op.website}</a>
+    </p>
+
+    <h2>Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV</h2>
+    <p>{op.owner}, {op.street}, {op.zip} {op.cityName}</p>
+
+    <h2>Verbraucherstreitbeilegung / Universalschlichtungsstelle</h2>
+    <p>
+      Wir sind nicht bereit und nicht verpflichtet, an Streitbeilegungsverfahren vor einer
+      Verbraucherschlichtungsstelle teilzunehmen. Plattform der EU-Kommission zur Online-Streitbeilegung:
+      <a href="https://ec.europa.eu/consumers/odr/" rel="nofollow">https://ec.europa.eu/consumers/odr/</a>
+    </p>
+
+    <h2>Haftung für Inhalte</h2>
+    <p>
+      Als Diensteanbieter sind wir gemäß § 7 Abs. 1 DDG für eigene Inhalte auf diesen Seiten nach den
+      allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 DDG sind wir als Diensteanbieter jedoch nicht
+      verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu
+      forschen, die auf eine rechtswidrige Tätigkeit hinweisen.
+    </p>
+
+    <h2>Haftung für Links</h2>
+    <p>
+      Unser Angebot enthält ggf. Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss
+      haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der
+      verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich.
+    </p>
+
+    <h2>Urheberrecht</h2>
+    <p>
+      Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen
+      Urheberrecht. Beiträge Dritter sind als solche gekennzeichnet. Vervielfältigung, Bearbeitung,
+      Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der
+      schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers.
+    </p>
+
+    <p class="note">Hinweis: Diese Vorlage vor dem Livegang anwaltlich bzw. mit einem Impressums-Generator (z. B. e-recht24) prüfen.</p>
+    <a class="back" href="/">← Zurück zur Startseite</a>
+  </div>
+</Base>

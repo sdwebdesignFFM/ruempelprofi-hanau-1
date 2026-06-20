@@ -1,0 +1,45 @@
+---
+import { Icon } from 'astro-icon/components';
+import { city } from '../data/hanau';
+// Versand über Web3Forms (https://web3forms.com) – funktioniert ohne Client-JS auf statischem Hosting.
+const redirectUrl = `${city.url}/danke`;
+---
+<form class="cform" method="post" action="https://api.web3forms.com/submit" id="anfrage">
+  <input type="hidden" name="access_key" value={city.web3formsKey} />
+  <input type="hidden" name="subject" value={`Neue Entrümpelungs-Anfrage über ${city.domain}`} />
+  <input type="hidden" name="from_name" value={city.brand} />
+  <input type="hidden" name="redirect" value={redirectUrl} />
+  <!-- Spam-Honeypot (für Menschen unsichtbar) -->
+  <input type="checkbox" name="botcheck" class="sr-only" tabindex="-1" autocomplete="off" aria-hidden="true" />
+
+  <div class="field" style="gap:6px">
+    <h3>Kostenlose Besichtigung anfragen</h3>
+    <span class="fhead-sub">In 1 Minute ausgefüllt – wir melden uns innerhalb von 24 Stunden.</span>
+  </div>
+  <div class="field">
+    <label for="f-name">Name</label>
+    <input id="f-name" name="name" type="text" placeholder="Ihr Name" required autocomplete="name" />
+  </div>
+  <div class="field">
+    <label for="f-tel">Telefon</label>
+    <input id="f-tel" name="telefon" type="tel" placeholder="Ihre Telefonnummer" required autocomplete="tel" />
+  </div>
+  <div class="field">
+    <label for="f-art">Art der Entrümpelung</label>
+    <select id="f-art" name="art">
+      <option value="">Bitte wählen …</option>
+      {city.services.items.map((s) => <option value={s.title}>{s.title}</option>)}
+      <option value="Sonstiges">Sonstiges</option>
+    </select>
+  </div>
+  <div class="field">
+    <label for="f-msg">Nachricht (optional)</label>
+    <textarea id="f-msg" name="nachricht" placeholder="Was soll entrümpelt werden?"></textarea>
+  </div>
+  <label class="consent">
+    <input type="checkbox" name="consent" required />
+    <span>Ich stimme der Verarbeitung meiner Daten gemäß <a href="/datenschutz">Datenschutzerklärung</a> zu.</span>
+  </label>
+  <button class="btn btn-call btn-full" type="submit"><Icon name="lucide:send" />Jetzt unverbindlich anfragen</button>
+  <div class="trustline"><Icon name="lucide:lock" />100 % unverbindlich · kostenlos · Antwort in 24 h</div>
+</form>

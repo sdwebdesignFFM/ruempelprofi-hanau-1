@@ -1,0 +1,20 @@
+---
+import Base from '../layouts/Base.astro';
+import { Icon } from 'astro-icon/components';
+import { city } from '../data/hanau';
+---
+<Base title={`Vielen Dank – ${city.brand}`} description="Ihre Anfrage ist eingegangen." noindex={true}>
+  <section class="section">
+    <div class="container" style="max-width:600px;text-align:center;display:flex;flex-direction:column;gap:16px;align-items:center">
+      <span class="iconwrap" style="width:64px;height:64px;background:var(--primary-light)"><Icon name="lucide:check" /></span>
+      <h1 style="font-size:30px;font-weight:800">Vielen Dank für Ihre Anfrage!</h1>
+      <p style="color:var(--text-secondary);font-size:17px;line-height:1.6">
+        Ihre Anfrage ist bei uns eingegangen. Wir melden uns innerhalb von 24 Stunden mit einem
+        unverbindlichen Festpreis-Angebot bei Ihnen.
+      </p>
+      <p style="color:var(--text-secondary)">Es ist dringend? Rufen Sie uns einfach direkt an:</p>
+      <a class="btn btn-call" href={`tel:${city.nap.phoneLink}`}><Icon name="lucide:phone" />{city.nap.phoneDisplay}</a>
+      <a class="back" href="/" style="margin-top:16px;color:var(--primary);font-weight:600">← Zurück zur Startseite</a>
+    </div>
+  </section>
+</Base>

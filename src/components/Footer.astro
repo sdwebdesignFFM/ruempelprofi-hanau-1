@@ -1,0 +1,35 @@
+---
+import { Icon } from 'astro-icon/components';
+import { city } from '../data/hanau';
+const year = 2026;
+---
+<footer class="footer">
+  <div class="container">
+    <div class="col">
+      <span class="logo"><span class="mark"><Icon name="lucide:truck" /></span><span>{city.brand}</span></span>
+      <p class="tagline">Ihr zuverlässiger Partner für Entrümpelung & Haushaltsauflösung in {city.name} & Umgebung – zum Festpreis.</p>
+      <a class="footer-phone" href={`tel:${city.nap.phoneLink}`}><Icon name="lucide:phone" />{city.nap.phoneDisplay}</a>
+      <span class="hours">{city.nap.openingHours} · kostenlose Besichtigung</span>
+    </div>
+    <div class="col">
+      <strong>Leistungen</strong>
+      <div class="footer-links">
+        {city.services.items.map((s) => <a href={s.href}>{s.title}</a>)}
+      </div>
+    </div>
+    <div class="col">
+      <strong>Service</strong>
+      <div class="footer-links">
+        <a href="#ablauf">Ablauf</a>
+        <a href="#preise">Preise</a>
+        <a href="#kontakt">Kontakt</a>
+        <a href="/impressum">Impressum</a>
+        <a href="/datenschutz">Datenschutz</a>
+      </div>
+    </div>
+    <div class="legal">
+      <span>© {year} {city.brand} · betrieben von {city.operator.company}, {city.operator.cityName}</span>
+      <span>Entrümpelung & Haushaltsauflösung in {city.name} & Umgebung</span>
+    </div>
+  </div>
+</footer>
