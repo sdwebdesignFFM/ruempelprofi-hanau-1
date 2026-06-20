@@ -1,0 +1,27 @@
+---
+import { Icon } from 'astro-icon/components';
+import ContactForm from './ContactForm.astro';
+import { city } from '../data/hanau';
+---
+<section class="section final" id="kontakt">
+  <div class="container final-inner">
+    <div class="final-left">
+      <span class="eyebrow">{city.finalCta.eyebrow}</span>
+      <h2>{city.finalCta.h2}</h2>
+      <p class="body">{city.finalCta.body}</p>
+      <a class="phone-block" href={`tel:${city.nap.phoneLink}`}>
+        <span class="pi"><Icon name="lucide:phone-call" /></span>
+        <span>
+          <span class="small">{city.nap.openingHours} · kostenlos anrufen</span><br />
+          <span class="num">{city.nap.phoneDisplay}</span>
+        </span>
+      </a>
+      <div class="final-badges">
+        {city.finalCta.badges.map((b) => (
+          <span><Icon name="lucide:circle-check" />{b}</span>
+        ))}
+      </div>
+    </div>
+    <ContactForm />
+  </div>
+</section>

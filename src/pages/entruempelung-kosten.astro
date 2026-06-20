@@ -1,0 +1,133 @@
+---
+import { Icon } from 'astro-icon/components';
+import Base from '../layouts/Base.astro';
+import ProcessSection from '../components/ProcessSection.astro';
+import CtaSection from '../components/CtaSection.astro';
+import { city } from '../data/hanau';
+import { servicePages } from '../data/services';
+
+const factors = [
+  { icon: 'package', title: 'Menge & Volumen', desc: 'Wie viel Hausrat und Mobiliar zu räumen ist – der größte Kostenfaktor.' },
+  { icon: 'trash-2', title: 'Entsorgungsaufwand', desc: 'Art des Materials und Deponiekosten, z. B. Sondermüll oder Elektrogeräte.' },
+  { icon: 'building', title: 'Zugang & Etage', desc: 'Stockwerk, Aufzug und Anfahrtsweg beeinflussen den Arbeitsaufwand.' },
+  { icon: 'wrench', title: 'Demontage', desc: 'Abbau von Küchen, Einbauten oder Möbeln, die zerlegt werden müssen.' },
+  { icon: 'recycle', title: 'Wertanrechnung', desc: 'Verwertbare Gegenstände rechnen wir an – das senkt Ihren Preis.' },
+  { icon: 'calendar', title: 'Termin', desc: 'Planbare Termine sind günstiger als sehr kurzfristige Express-Einsätze.' },
+];
+
+const tips = [
+  'Verwertbare Möbel & Geräte anrechnen lassen – das reduziert den Festpreis.',
+  'Frühzeitig Termin vereinbaren statt teurer Express-Räumung.',
+  'Guten Zugang schaffen (Parkmöglichkeit, freie Wege) spart Arbeitszeit.',
+  'Alle Räume in einem Auftrag bündeln statt mehrerer Einzeltermine.',
+];
+
+const faqs = [
+  { q: 'Was kostet eine Entrümpelung in Hanau?', a: 'Das hängt von Menge, Zugang und Entsorgungsaufwand ab. Eine 1-Zimmer-Wohnung startet bei ca. 490 €, ein Einfamilienhaus bei ca. 1.490 €. Den verbindlichen Festpreis erhalten Sie nach der kostenlosen Besichtigung.' },
+  { q: 'Gibt es versteckte Kosten?', a: 'Nein. Was wir vereinbaren, gilt – inklusive Anfahrt und Entsorgung, ohne Nachforderungen.' },
+  { q: 'Wer zahlt die Entrümpelung im Erbfall?', a: 'In der Regel die Erben bzw. der Nachlass. Bei Mietwohnungen trägt die Kosten meist die Person, die zur Räumung verpflichtet ist.' },
+  { q: 'Werden wertvolle Gegenstände angerechnet?', a: 'Ja. Verwertbares wie gut erhaltene Möbel oder Elektrogeräte rechnen wir an und reduzieren damit Ihren Festpreis.' },
+  { q: 'Ist die Besichtigung wirklich kostenlos?', a: 'Ja, Besichtigung und Angebot sind kostenlos und völlig unverbindlich.' },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+};
+---
+<Base
+  title={`Entrümpelung Kosten Hanau 2026 – Preise & Preisliste | ${city.brand}`}
+  description="Was kostet eine Entrümpelung in Hanau? Transparente Preise, Preisbeispiele & alle Kostenfaktoren. Verbindlicher Festpreis nach kostenloser Besichtigung."
+>
+  <section class="subhero">
+    <div class="container">
+      <nav class="breadcrumb"><a href="/">Start</a> › Entrümpelung Kosten</nav>
+      <h1>Was kostet eine Entrümpelung in Hanau?</h1>
+      <p class="sub">Transparente Preise, Preisbeispiele und alle Kostenfaktoren auf einen Blick – Ihren verbindlichen Festpreis erhalten Sie nach einer kostenlosen Besichtigung.</p>
+      <div class="cta-row">
+        <a class="btn btn-call" href={`tel:${city.nap.phoneLink}`}><Icon name="lucide:phone" />Festpreis anfragen</a>
+        <a class="btn btn-quote" href="#kontakt"><Icon name="lucide:clipboard-check" />Kostenlose Besichtigung</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container prose">
+      <p>
+        Die Kosten einer Entrümpelung lassen sich nicht pauschal nennen – sie hängen vor allem von der Menge,
+        der Zugänglichkeit und dem Entsorgungsaufwand ab. Damit Sie nicht im Dunkeln tappen, geben wir Ihnen hier
+        realistische Richtwerte und erklären, was den Preis bestimmt. Verbindlich wird es nach einer kostenlosen
+        Besichtigung: Dann erhalten Sie einen <strong>Festpreis ohne versteckte Kosten</strong>.
+      </p>
+      <h2>Preisbeispiele für Hanau</h2>
+    </div>
+    <div class="container" style="max-width:800px;margin-top:16px">
+      <div class="price-card">
+        <div class="head">Richtwerte (inkl. Entsorgung)</div>
+        {city.pricing.items.map((it) => (
+          <div class="price-row"><span>{it.label}</span><span class="p">{it.price}</span></div>
+        ))}
+        <div class="price-row"><span>Gewerbe / Büro</span><span class="p">auf Anfrage</span></div>
+        <div class="price-note">{city.pricing.note}</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--muted">
+    <div class="container">
+      <div class="s-head">
+        <span class="eyebrow">KOSTENFAKTOREN</span>
+        <h2>Was den Preis bestimmt</h2>
+      </div>
+      <div class="grid grid-2 grid-3">
+        {factors.map((f) => (
+          <div class="card">
+            <span class="iconwrap"><Icon name={`lucide:${f.icon}`} /></span>
+            <h3>{f.title}</h3>
+            <p>{f.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container prose">
+      <h2>So senken Sie die Kosten</h2>
+      <ul class="price-bullets">
+        {tips.map((t) => (
+          <li><Icon name="lucide:circle-check" />{t}</li>
+        ))}
+      </ul>
+      <p style="margin-top:20px">
+        Tipp: Für einzelne Bereiche lohnt sich oft eine gezielte Leistung – z. B.
+        <a href="/keller-entruempeln-hanau" style="color:var(--primary);font-weight:600">Keller entrümpeln</a> oder
+        <a href="/wohnungsaufloesung-hanau" style="color:var(--primary);font-weight:600">Wohnungsauflösung</a>.
+      </p>
+    </div>
+  </section>
+
+  <ProcessSection />
+
+  <section class="section section--muted">
+    <div class="container">
+      <div class="s-head">
+        <span class="eyebrow">HÄUFIGE FRAGEN</span>
+        <h2>Kosten & Preise – häufige Fragen</h2>
+      </div>
+      <div class="faq-list">
+        {faqs.map((f) => (
+          <details class="faq-item">
+            <summary>{f.q}<Icon name="lucide:chevron-down" /></summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CtaSection />
+
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+</Base>

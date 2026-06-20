@@ -1,0 +1,95 @@
+---
+import { Icon } from 'astro-icon/components';
+import Base from '../layouts/Base.astro';
+import ProcessSection from '../components/ProcessSection.astro';
+import CtaSection from '../components/CtaSection.astro';
+import { city } from '../data/hanau';
+import { servicePages } from '../data/services';
+
+export function getStaticPaths() {
+  return servicePages.map((s) => ({ params: { service: s.slug }, props: { s } }));
+}
+const { s } = Astro.props;
+const others = servicePages.filter((x) => x.slug !== s.slug);
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: s.faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+---
+<Base title={`${s.title} | ${city.brand}`} description={s.metaDescription}>
+  <section class="subhero">
+    <div class="container">
+      <nav class="breadcrumb"><a href="/">Start</a> › {s.navTitle}</nav>
+      <h1>{s.h1}</h1>
+      <p class="sub">{s.lead}</p>
+      <div class="cta-row">
+        <a class="btn btn-call" href={`tel:${city.nap.phoneLink}`}><Icon name="lucide:phone" />Jetzt anrufen</a>
+        <a class="btn btn-quote" href="#kontakt"><Icon name="lucide:clipboard-check" />Kostenlose Besichtigung</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container prose">
+      <p>{s.body}</p>
+      <h2>Unsere Leistungen im Überblick</h2>
+      <ul class="price-bullets">
+        {s.includes.map((i) => (
+          <li><Icon name="lucide:circle-check" />{i}</li>
+        ))}
+      </ul>
+      <p style="margin-top:20px">
+        Den genauen Preis erhalten Sie nach einer kostenlosen Besichtigung als verbindliches Festpreis-Angebot.
+        <a href="/entruempelung-kosten" style="color:var(--primary);font-weight:600">→ Zur Preisübersicht</a>
+      </p>
+    </div>
+  </section>
+
+  <ProcessSection />
+
+  <section class="section section--muted">
+    <div class="container">
+      <div class="s-head">
+        <span class="eyebrow">HÄUFIGE FRAGEN</span>
+        <h2>{s.navTitle} in Hanau – Ihre Fragen</h2>
+      </div>
+      <div class="faq-list">
+        {s.faqs.map((f) => (
+          <details class="faq-item">
+            <summary>{f.q}<Icon name="lucide:chevron-down" /></summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="s-head">
+        <span class="eyebrow">WEITERE LEISTUNGEN</span>
+        <h2>Das bieten wir in Hanau außerdem</h2>
+      </div>
+      <div class="grid grid-2 grid-3">
+        {others.map((o) => (
+          <a class="card" href={`/${o.slug}`}>
+            <span class="iconwrap"><Icon name={`lucide:${o.icon}`} /></span>
+            <h3>{o.navTitle}</h3>
+            <p>{o.short}</p>
+            <span class="more">Mehr erfahren <Icon name="lucide:arrow-right" /></span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CtaSection />
+
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+</Base>

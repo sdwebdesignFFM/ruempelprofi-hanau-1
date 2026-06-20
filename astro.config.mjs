@@ -5,6 +5,6 @@ import icon from 'astro-icon';
 // Pro Stadt anpassen: site = die Produktiv-Domain (für Sitemap & kanonische URLs)
 export default defineConfig({
   site: 'https://ruempelprofi-hanau.de',
-  integrations: [sitemap(), icon()],
+  integrations: [sitemap({ filter: (page) => !page.includes('/danke') }), icon()],
   build: { inlineStylesheets: 'auto' },
 });

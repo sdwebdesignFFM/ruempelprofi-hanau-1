@@ -1,0 +1,22 @@
+---
+import { Icon } from 'astro-icon/components';
+import { city } from '../data/hanau';
+---
+<section class="section section--muted" id="ablauf">
+  <div class="container">
+    <div class="s-head">
+      <span class="eyebrow">{city.process.eyebrow}</span>
+      <h2>{city.process.h2}</h2>
+      <p>{city.process.sub}</p>
+    </div>
+    <div class="grid grid-2 grid-4">
+      {city.process.steps.map((st) => (
+        <div class="step">
+          <div class="step-top"><span class="step-num">{st.n}</span><Icon name={`lucide:${st.icon}`} /></div>
+          <h3>{st.title}</h3>
+          <p>{st.desc}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

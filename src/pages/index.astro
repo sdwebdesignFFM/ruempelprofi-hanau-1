@@ -2,7 +2,8 @@
 import { Image } from 'astro:assets';
 import { Icon } from 'astro-icon/components';
 import Base from '../layouts/Base.astro';
-import ContactForm from '../components/ContactForm.astro';
+import ProcessSection from '../components/ProcessSection.astro';
+import CtaSection from '../components/CtaSection.astro';
 import { city } from '../data/hanau';
 import heroImg from '../assets/hero.png';
 import areaImg from '../assets/area.png';
@@ -76,27 +77,7 @@ const faqSchema = {
   </section>
 
   <!-- ABLAUF -->
-  <section class="section section--muted" id="ablauf">
-    <div class="container">
-      <div class="s-head">
-        <span class="eyebrow">{city.process.eyebrow}</span>
-        <h2>{city.process.h2}</h2>
-        <p>{city.process.sub}</p>
-      </div>
-      <div class="grid grid-2 grid-4">
-        {city.process.steps.map((st) => (
-          <div class="step">
-            <div class="step-top">
-              <span class="step-num">{st.n}</span>
-              <Icon name={`lucide:${st.icon}`} />
-            </div>
-            <h3>{st.title}</h3>
-            <p>{st.desc}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
+  <ProcessSection />
 
   <!-- PREIS -->
   <section class="section" id="preise">
@@ -111,6 +92,7 @@ const faqSchema = {
           ))}
         </ul>
         <a class="btn btn-call" href="#kontakt" style="align-self:flex-start"><Icon name="lucide:badge-euro" />Festpreis anfragen</a>
+        <a href="/entruempelung-kosten" style="color:var(--primary);font-weight:600;font-size:15px">→ Komplette Preisübersicht & Kostenfaktoren</a>
       </div>
       <div class="price-card">
         <div class="head">Preisbeispiele {city.name}</div>
@@ -203,28 +185,7 @@ const faqSchema = {
   </section>
 
   <!-- FINAL CTA -->
-  <section class="section final" id="kontakt">
-    <div class="container final-inner">
-      <div class="final-left">
-        <span class="eyebrow">{city.finalCta.eyebrow}</span>
-        <h2>{city.finalCta.h2}</h2>
-        <p class="body">{city.finalCta.body}</p>
-        <a class="phone-block" href={`tel:${city.nap.phoneLink}`}>
-          <span class="pi"><Icon name="lucide:phone-call" /></span>
-          <span>
-            <span class="small">{city.nap.openingHours} · kostenlos anrufen</span><br />
-            <span class="num">{city.nap.phoneDisplay}</span>
-          </span>
-        </a>
-        <div class="final-badges">
-          {city.finalCta.badges.map((b) => (
-            <span><Icon name="lucide:circle-check" />{b}</span>
-          ))}
-        </div>
-      </div>
-      <ContactForm />
-    </div>
-  </section>
+  <CtaSection />
 
   <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
 </Base>
