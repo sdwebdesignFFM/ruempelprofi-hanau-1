@@ -29,6 +29,15 @@ const breadcrumbSchema = {
     { '@type': 'ListItem', position: 2, name: s.navTitle, item: `${city.url}/${s.slug}` },
   ],
 };
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  serviceType: s.navTitle,
+  name: s.h1,
+  url: `${city.url}/${s.slug}`,
+  areaServed: city.area.places.map((p) => ({ '@type': 'Place', name: p })),
+  provider: { '@type': 'LocalBusiness', name: city.brand, telephone: city.nap.phoneLink },
+};
 ---
 <Base title={s.title} description={s.metaDescription}>
   <section class="subhero">
@@ -101,4 +110,5 @@ const breadcrumbSchema = {
 
   <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
   <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
 </Base>

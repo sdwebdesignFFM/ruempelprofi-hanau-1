@@ -57,6 +57,14 @@ export const city = {
     ],
   },
 
+  intro: {
+    h2: 'Ihre Entrümpelung in Hanau – zum Festpreis, ohne Stress',
+    paragraphs: [
+      'Ob Wohnungsauflösung, Haushaltsauflösung nach einem Trauerfall, ein vollgestellter Keller oder die komplette Entrümpelung eines Hauses – als Entrümpelungsfirma in Hanau übernehmen wir die gesamte Räumung und die fachgerechte Entsorgung. Sie erhalten vorab einen verbindlichen Festpreis, wir arbeiten zügig und übergeben das Objekt besenrein.',
+      'Wir sind in ganz Hanau und Umgebung im Einsatz – von der Innenstadt über Großauheim, Steinheim und Kesselstadt bis nach Maintal, Bruchköbel und Erlensee. Vereinbaren Sie eine kostenlose, unverbindliche Besichtigung – telefonisch oder bequem über das Formular.',
+    ],
+  },
+
   trust: [
     { icon: 'clipboard-check', label: 'Kostenlose & unverbindliche Besichtigung' },
     { icon: 'shield-check', label: 'Vollständig versicherter Fachbetrieb' },

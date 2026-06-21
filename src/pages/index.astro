@@ -41,7 +41,7 @@ const faqSchema = {
         </div>
       </div>
       <div class="hero-img">
-        <Image src={heroImg} alt={`Entrümpelung in ${city.name} – Team beim Beladen des Transporters`} widths={[390, 640, 760]} sizes="(min-width: 768px) 540px, 100vw" loading="eager" />
+        <Image src={heroImg} alt={`Entrümpelung in ${city.name} – Team beim Beladen des Transporters`} widths={[390, 640, 760]} sizes="(min-width: 768px) 540px, 100vw" loading="eager" fetchpriority="high" decoding="async" />
       </div>
     </div>
   </section>
@@ -52,6 +52,14 @@ const faqSchema = {
       {city.trust.map((t) => (
         <div class="trust-item"><Icon name={`lucide:${t.icon}`} />{t.label}</div>
       ))}
+    </div>
+  </section>
+
+  <!-- INTRO (SEO-Text) -->
+  <section class="section section--muted">
+    <div class="container prose">
+      <h2>{city.intro.h2}</h2>
+      {city.intro.paragraphs.map((p) => <p>{p}</p>)}
     </div>
   </section>
 
